@@ -177,6 +177,10 @@ export function lineChart() {
         .style("stroke", "none")
         .style("opacity", 0.8)
     }
+    svg.selectAll()
+    .on("mouseover", mouseover)
+    .on("mousemove", mousemove)
+    .on("mouseleave", mouseleave)
     
     // Add Checkbox
 
