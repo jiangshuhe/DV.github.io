@@ -9,7 +9,6 @@ export function lineChart() {
   const yRange = [height - margin.bottom, margin.top];
 
   // Construct scales and axes
-  //
   const xScale = d3.scaleTime().range(xRange);
   const yScale = d3.scaleLinear().range(yRange);
 
@@ -18,7 +17,7 @@ export function lineChart() {
     .axisBottom(xScale)
     .ticks(width / 80)
     .tickSizeOuter(0);
-  const yAxis = d3.axisLeft(yScale).ticks(height / 40);
+  const yAxis = d3.axisLeft(yScale).ticks(height / 80);
 
 
   // Create the SVG element for the chart
@@ -42,7 +41,7 @@ export function lineChart() {
     .attr('x', 51)
     .attr('y', 121)
     .attr('width', 3000)
-    .attr('height', 73)
+    .attr('height', 74)
     .attr('stroke', '#facf39')
     .attr('fill', '#facf39')
     .attr("opacity",0.5)
@@ -51,7 +50,7 @@ export function lineChart() {
     .attr('x', 51)
     .attr('y', 46)
     .attr('width', 3000)
-    .attr('height', 73)
+    .attr('height', 74)
     .attr('stroke', '#f99049')
     .attr('fill', '#f99049')
     .attr("opacity",0.5)
@@ -65,7 +64,7 @@ export function lineChart() {
     .attr('fill', '#f65e5f')
     .attr("opacity",0.5)
 
-  // Add the x axis 
+  // Add the x axis
   svg
     .append("g")
     .attr("class", "xaxis")
@@ -78,22 +77,36 @@ export function lineChart() {
     .attr("transform", `translate(${margin.left},0)`);
 
     
-
+  // Mutiple lines chart
   const line = svg.append("path").attr("class", "line");
+  const area = svg.append("path").attr("class", "area");
   
 
-  function update(X1: Int32Array, Y1: Int32Array) {
+  function update1(X: Int32Array, X1: Int32Array, 
+    Y: Int32Array, Y_1: Int32Array, Y_2: Int32Array, Y1: Int32Array) {
 
+   const I = d3.range(X.length);
+   const II = d3.range(X1.length);
 
-   const I = d3.range(X1.length);
-
-    xScale.domain([d3.min(X1) as number, d3.max(X1) as number]);
+    xScale.domain([d3.min(X) as number, d3.max(X) as number]);
     yScale.domain([0, 160]);
+
+    const a = d3
+      .area<number>()
+      .x((i) => xScale(X[i]))
+      .y0((i) => yScale(Y_1[i]))
+      .y1((i) => yScale(Y_2[i]));
+
+    area
+      .attr("transform", "translate(" + 0 + "," + 0 + ")")
+      .attr("d", a(I))
+      .attr("fill", "#000000")
+      .attr("opacity", 0.2);
 
    const l  = d3
       .line<number>()
-      .x((i) => xScale(X1[i]))
-      .y((i) => yScale(Y1[i]));
+      .x((i) => xScale(X[i]))
+      .y((i) => yScale(Y[i]));
     
     line
       .attr("transform", "translate(" + 0 + "," + 0 + ")")
@@ -102,24 +115,23 @@ export function lineChart() {
       .style("stroke", "#000000")
       .style("stroke-width", "2");
    
-      // Clear the axis so that when we add the grid, we don't get duplicate lines
-    // console.log(svg.select(".line").selectAll("*"));
+
     svg.select(".xaxis").selectAll("*").remove();
     svg.select(".yaxis").selectAll("*").remove();
     svg.select(".line").selectAll("*").remove();
-   
+    svg.select(".area").selectAll("*").remove();
 
-    // Update axes as we set new domains
+    // Update axes since we set new domains
     svg
       .select<SVGSVGElement>(".yaxis")
       .call(yAxis)
-      // add gridlines
+      // Add gridlines
       .call((g) =>
         g
           .selectAll(".tick line")
           .clone()
           .attr("x2", width - margin.right - margin.left)
-          .attr("stroke-opacity", 0.1)
+          .attr("stroke-opacity", 0.08)
       )
       .call((g) =>
         g
@@ -133,7 +145,38 @@ export function lineChart() {
 
     svg.select<SVGSVGElement>(".xaxis").call(xAxis);
 
-      // Add the path using this helper function
+
+    // Add Checkbox
+
+    d3.select< HTMLInputElement, unknown >("#mb")
+      .on("change", function(){
+
+      const checked = this.checked;
+      if (checked) {
+
+      svg
+        .selectAll("circle")
+        .data(II)
+        .enter()
+        .append("circle")
+        .attr("class","dots")
+        .attr("cx", (i) => xScale(X1[i]))
+        .attr("cy", (i) => yScale(Y1[i]))
+        .attr("r",1)
+        .attr("opacity", 0.8)
+        .attr("transform", "translate(" + 0 + "," + 0 + ")")
+        .style("fill", "#000000") }
+
+        else {
+          update1 
+      }
+        return {
+          Element: svg.node()!,
+          update1};
+        }
+
+      );
+
 
 
     // Add legends
@@ -166,6 +209,6 @@ export function lineChart() {
 
   return {
     element: svg.node()!,
-    update,
+    update1,
   };
 }
