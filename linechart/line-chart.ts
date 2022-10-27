@@ -146,42 +146,6 @@ export function lineChart() {
     svg.select<SVGSVGElement>(".xaxis").call(xAxis);
 
 
-    // Add tooltips
-    var Tooltip = d3.select("#div_template")
-      .append("div")
-      .style("opacity", 0)
-      .attr("class", "tooltip")
-      .style("background-color", "white")
-      .style("border", "solid")
-      .style("border-width", "2px")
-      .style("border-radius", "5px")
-      .style("padding", "5px")
-
-    var mouseover = function(d) {
-      Tooltip
-        .style("opacity", 1)
-      d3.select(this)
-        .style("stroke", "none")
-        .style("opacity", 1)
-  }
-    var mousemove = function(d) {
-      Tooltip
-        .html("The valueis: " )
-        .style("left", (d3.mouse(this)[0]+70) + "px")
-        .style("top", (d3.mouse(this)[1]) + "px")
-  }
-    var mouseleave = function(d) {
-      Tooltip
-        .style("opacity", 0)
-      d3.select(this)
-        .style("stroke", "none")
-        .style("opacity", 0.8)
-    }
-    svg.selectAll()
-    .on("mouseover", mouseover)
-    .on("mousemove", mousemove)
-    .on("mouseleave", mouseleave)
-    
     // Add Checkbox
 
     d3.select< HTMLInputElement, unknown >("#mb")
