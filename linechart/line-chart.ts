@@ -9,6 +9,7 @@ export function lineChart() {
   const yRange = [height - margin.bottom, margin.top];
 
   // Construct scales and axes
+  //
   const xScale = d3.scaleTime().range(xRange);
   const yScale = d3.scaleLinear().range(yRange);
 
@@ -64,7 +65,7 @@ export function lineChart() {
     .attr('fill', '#f65e5f')
     .attr("opacity",0.5)
 
-  // Add the x axis
+  // Add the x axis 
   svg
     .append("g")
     .attr("class", "xaxis")
@@ -108,7 +109,7 @@ export function lineChart() {
     svg.select(".line").selectAll("*").remove();
    
 
-    // Update axes since we set new domains
+    // Update axes as we set new domains
     svg
       .select<SVGSVGElement>(".yaxis")
       .call(yAxis)
@@ -123,44 +124,43 @@ export function lineChart() {
       .call((g) =>
         g
           .append("text")
-          .attr("y", margin.top)
-          .attr("x", -22)
+          .attr("y", 324)
+          .attr("x", 0)
           .attr("fill", "black")
-          .text("A_AQI")
+          .text("US AQI")
+          .style("font-size", "13px")
       );
 
     svg.select<SVGSVGElement>(".xaxis").call(xAxis);
 
       // Add the path using this helper function
 
-// Add the path using this helper function
-
 
     // Add legends
       svg.append("circle")
-      .attr("cx",50).attr("cy",320).attr("r", 7).style("fill", "#9cd84e")
+      .attr("cx",70).attr("cy",320).attr("r", 7).style("fill", "#9cd84e")
       svg.append("circle")
-      .attr("cx",130).attr("cy",320).attr("r", 7).style("fill", "#facf39")
+      .attr("cx",150).attr("cy",320).attr("r", 7).style("fill", "#facf39")
       svg.append("circle")
-      .attr("cx",240).attr("cy",320).attr("r", 7).style("fill", "#f99049")
+      .attr("cx",260).attr("cy",320).attr("r", 7).style("fill", "#f99049")
       svg.append("circle")
-      .attr("cx",500).attr("cy",320).attr("r", 7).style("fill", "#f65e5f")
+      .attr("cx",520).attr("cy",320).attr("r", 7).style("fill", "#f65e5f")
       svg.append("circle")
-      .attr("cx",610).attr("cy",320).attr("r", 7).style("fill", "#a070b6")
+      .attr("cx",630).attr("cy",320).attr("r", 7).style("fill", "#a070b6")
       svg.append("circle")
-      .attr("cx",760).attr("cy",320).attr("r", 7).style("fill", "#a06a7b")
+      .attr("cx",780).attr("cy",320).attr("r", 7).style("fill", "#a06a7b")
       svg.append("text")
-      .attr("x", 65).attr("y", 320).text("Good").style("font-size", "15px").attr("alignment-baseline","middle")
+      .attr("x", 85).attr("y", 320).text("Good").style("font-size", "15px").attr("alignment-baseline","middle")
       svg.append("text")
-      .attr("x", 145).attr("y", 320).text("Moderate").style("font-size", "15px").attr("alignment-baseline","middle")
+      .attr("x", 165).attr("y", 320).text("Moderate").style("font-size", "15px").attr("alignment-baseline","middle")
       svg.append("text")
-      .attr("x", 255).attr("y", 320).text("Unhealthy for Sensitive Groups").style("font-size", "15px").attr("alignment-baseline","middle")
+      .attr("x", 275).attr("y", 320).text("Unhealthy for Sensitive Groups").style("font-size", "15px").attr("alignment-baseline","middle")
       svg.append("text")
-      .attr("x", 515).attr("y", 320).text("Unhealthy").style("font-size", "15px").attr("alignment-baseline","middle")
+      .attr("x", 535).attr("y", 320).text("Unhealthy").style("font-size", "15px").attr("alignment-baseline","middle")
       svg.append("text")
-      .attr("x", 625).attr("y", 320).text("Very Unhealthy").style("font-size", "15px").attr("alignment-baseline","middle")
+      .attr("x", 645).attr("y", 320).text("Very Unhealthy").style("font-size", "15px").attr("alignment-baseline","middle")
       svg.append("text")
-      .attr("x", 775).attr("y", 320).text("Hazardous").style("font-size", "15px").attr("alignment-baseline","middle")
+      .attr("x", 795).attr("y", 320).text("Hazardous").style("font-size", "15px").attr("alignment-baseline","middle")
 
   }
 
