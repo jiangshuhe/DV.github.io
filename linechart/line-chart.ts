@@ -28,7 +28,41 @@ export function lineChart() {
     .attr("viewBox", [0, 0, width, height])
     .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
   
+    svg.append('rect')
+    .attr('x', 51)
+    .attr('y', 196)
+    .attr('width', 700)
+    .attr('height', 73)
+    .attr('stroke', '#9cd84e')
+    .attr('fill', '#9cd84e')
+    .attr("opacity",0.5)
 
+    svg.append('rect')
+    .attr('x', 51)
+    .attr('y', 121)
+    .attr('width', 700)
+    .attr('height', 73)
+    .attr('stroke', '#facf39')
+    .attr('fill', '#facf39')
+    .attr("opacity",0.5)
+
+    svg.append('rect')
+    .attr('x', 51)
+    .attr('y', 46)
+    .attr('width', 700)
+    .attr('height', 73)
+    .attr('stroke', '#f99049')
+    .attr('fill', '#f99049')
+    .attr("opacity",0.5)
+
+    svg.append('rect')
+    .attr('x', 51)
+    .attr('y', 31)
+    .attr('width', 700)
+    .attr('height', 14)
+    .attr('stroke', '#f65e5f')
+    .attr('fill', '#f65e5f')
+    .attr("opacity",0.5)
 
   // Add the x axis
   svg
@@ -42,6 +76,8 @@ export function lineChart() {
     .attr("class", "yaxis")
     .attr("transform", `translate(${margin.left},0)`);
 
+    
+
   const line = svg.append("path").attr("class", "line");
   
 
@@ -51,7 +87,7 @@ export function lineChart() {
    const I = d3.range(X1.length);
 
     xScale.domain([d3.min(X1) as number, d3.max(X1) as number]);
-    yScale.domain([0, Math.max(...Y1)]);
+    yScale.domain([0, 160]);
 
    const l  = d3
       .line<number>()
@@ -94,6 +130,11 @@ export function lineChart() {
       );
 
     svg.select<SVGSVGElement>(".xaxis").call(xAxis);
+
+      // Add the path using this helper function
+
+// Add the path using this helper function
+
 
     // Add legends
       svg.append("circle")
