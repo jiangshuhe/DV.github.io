@@ -1,16 +1,17 @@
 import * as d3 from "d3";
-// import { color } from "d3";
+
 
 export function lineChart() {
-  const margin = { top: 30, right: 0, bottom: 30, left: 50 };
+  const margin = { top: 30, right: 0, bottom: 230, left: 50 };
   const width = document.body.clientWidth;
-  const height = 300;
+  const height = 500;
   const xRange = [margin.left, width - margin.right];
   const yRange = [height - margin.bottom, margin.top];
-  // Construct scales and axes.
+
+  // Construct scales and axes
   const xScale = d3.scaleTime().range(xRange);
   const yScale = d3.scaleLinear().range(yRange);
-  // const colors = [{"name":"Good","min":0,"max":50,"color":"#9cd84e"},{"name":"Moderate","min":51,"max":100,"color":"#facf39"},{"name":"Unhealthy for Sensitive Groups","min":101,"max":150,"color":"#f99049"},{"name":"Unhealthy","min":151,"max":200,"color":"#f65e5f"},{"name":"Very Unhealthy","min":201,"max":300,"color":"#a070b6"},{"name":"Hazardous","min":301,"color":"#a06a7b"}];
+
 
   const xAxis = d3
     .axisBottom(xScale)
@@ -19,7 +20,7 @@ export function lineChart() {
   const yAxis = d3.axisLeft(yScale).ticks(height / 40);
 
 
-  // Create the SVG element for the chart.
+  // Create the SVG element for the chart
   const svg = d3
     .create("svg")
     .attr("width", width)
@@ -47,7 +48,7 @@ export function lineChart() {
   function update(X1: Int32Array, Y1: Int32Array) {
 
 
-    const I = d3.range(X1.length);
+   const I = d3.range(X1.length);
 
     xScale.domain([d3.min(X1) as number, d3.max(X1) as number]);
     yScale.domain([0, Math.max(...Y1)]);
@@ -95,32 +96,33 @@ export function lineChart() {
     svg.select<SVGSVGElement>(".xaxis").call(xAxis);
 
     // Add legends
-    svg.append("circle")
-    .attr("cx",50).attr("cy",320).attr("r", 7).style("fill", "#9cd84e")
-    svg.append("circle")
-    .attr("cx",130).attr("cy",320).attr("r", 7).style("fill", "#facf39")
-    svg.append("circle")
-    .attr("cx",240).attr("cy",320).attr("r", 7).style("fill", "#f99049")
-    svg.append("circle")
-    .attr("cx",500).attr("cy",320).attr("r", 7).style("fill", "#f65e5f")
-    svg.append("circle")
-    .attr("cx",610).attr("cy",320).attr("r", 7).style("fill", "#a070b6")
-    svg.append("circle")
-    .attr("cx",760).attr("cy",320).attr("r", 7).style("fill", "#a06a7b")
-    svg.append("text")
-    .attr("x", 65).attr("y", 320).text("Good").style("font-size", "15px").attr("alignment-baseline","middle")
-    svg.append("text")
-    .attr("x", 145).attr("y", 320).text("Moderate").style("font-size", "15px").attr("alignment-baseline","middle")
-    svg.append("text")
-    .attr("x", 255).attr("y", 320).text("Unhealthy for Sensitive Groups").style("font-size", "15px").attr("alignment-baseline","middle")
-    svg.append("text")
-    .attr("x", 515).attr("y", 320).text("Unhealthy").style("font-size", "15px").attr("alignment-baseline","middle")
-    svg.append("text")
-    .attr("x", 625).attr("y", 320).text("Very Unhealthy").style("font-size", "15px").attr("alignment-baseline","middle")
-    svg.append("text")
-    .attr("x", 775).attr("y", 320).text("Hazardous").style("font-size", "15px").attr("alignment-baseline","middle")
+      svg.append("circle")
+      .attr("cx",50).attr("cy",320).attr("r", 7).style("fill", "#9cd84e")
+      svg.append("circle")
+      .attr("cx",130).attr("cy",320).attr("r", 7).style("fill", "#facf39")
+      svg.append("circle")
+      .attr("cx",240).attr("cy",320).attr("r", 7).style("fill", "#f99049")
+      svg.append("circle")
+      .attr("cx",500).attr("cy",320).attr("r", 7).style("fill", "#f65e5f")
+      svg.append("circle")
+      .attr("cx",610).attr("cy",320).attr("r", 7).style("fill", "#a070b6")
+      svg.append("circle")
+      .attr("cx",760).attr("cy",320).attr("r", 7).style("fill", "#a06a7b")
+      svg.append("text")
+      .attr("x", 65).attr("y", 320).text("Good").style("font-size", "15px").attr("alignment-baseline","middle")
+      svg.append("text")
+      .attr("x", 145).attr("y", 320).text("Moderate").style("font-size", "15px").attr("alignment-baseline","middle")
+      svg.append("text")
+      .attr("x", 255).attr("y", 320).text("Unhealthy for Sensitive Groups").style("font-size", "15px").attr("alignment-baseline","middle")
+      svg.append("text")
+      .attr("x", 515).attr("y", 320).text("Unhealthy").style("font-size", "15px").attr("alignment-baseline","middle")
+      svg.append("text")
+      .attr("x", 625).attr("y", 320).text("Very Unhealthy").style("font-size", "15px").attr("alignment-baseline","middle")
+      svg.append("text")
+      .attr("x", 775).attr("y", 320).text("Hazardous").style("font-size", "15px").attr("alignment-baseline","middle")
 
   }
+
   return {
     element: svg.node()!,
     update,
