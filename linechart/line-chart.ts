@@ -93,6 +93,33 @@ export function lineChart() {
       );
 
     svg.select<SVGSVGElement>(".xaxis").call(xAxis);
+
+    // Add legends
+    svg.append("circle")
+    .attr("cx",50).attr("cy",320).attr("r", 7).style("fill", "#9cd84e")
+    svg.append("circle")
+    .attr("cx",130).attr("cy",320).attr("r", 7).style("fill", "#facf39")
+    svg.append("circle")
+    .attr("cx",240).attr("cy",320).attr("r", 7).style("fill", "#f99049")
+    svg.append("circle")
+    .attr("cx",500).attr("cy",320).attr("r", 7).style("fill", "#f65e5f")
+    svg.append("circle")
+    .attr("cx",610).attr("cy",320).attr("r", 7).style("fill", "#a070b6")
+    svg.append("circle")
+    .attr("cx",760).attr("cy",320).attr("r", 7).style("fill", "#a06a7b")
+    svg.append("text")
+    .attr("x", 65).attr("y", 320).text("Good").style("font-size", "15px").attr("alignment-baseline","middle")
+    svg.append("text")
+    .attr("x", 145).attr("y", 320).text("Moderate").style("font-size", "15px").attr("alignment-baseline","middle")
+    svg.append("text")
+    .attr("x", 255).attr("y", 320).text("Unhealthy for Sensitive Groups").style("font-size", "15px").attr("alignment-baseline","middle")
+    svg.append("text")
+    .attr("x", 515).attr("y", 320).text("Unhealthy").style("font-size", "15px").attr("alignment-baseline","middle")
+    svg.append("text")
+    .attr("x", 625).attr("y", 320).text("Very Unhealthy").style("font-size", "15px").attr("alignment-baseline","middle")
+    svg.append("text")
+    .attr("x", 775).attr("y", 320).text("Hazardous").style("font-size", "15px").attr("alignment-baseline","middle")
+
   }
   return {
     element: svg.node()!,
