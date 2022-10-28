@@ -149,10 +149,10 @@ export function lineChart() {
     // Add Checkbox
 
     d3.select< HTMLInputElement, unknown >("#mb")
-      .on("change", function(){
+    .on("change", function() {
+        const cb = d3.select(this)
 
-      const checked = this.checked;
-      if (checked) {
+      if (cb.property("checked")) {
 
       svg
         .selectAll("circle")
@@ -168,44 +168,45 @@ export function lineChart() {
         .style("fill", "#000000") }
 
         else {
-          update1 
-      }
-        return {
-          Element: svg.node()!,
-          update1};
-        }
+      svg
+        .selectAll("circle")
+        .attr("r",0)
+        .attr("opacity", 0)
+          }
 
+        }
       );
 
 
-
-    // Add legends
-      svg.append("circle")
-      .attr("cx",70).attr("cy",320).attr("r", 7).style("fill", "#9cd84e")
-      svg.append("circle")
-      .attr("cx",150).attr("cy",320).attr("r", 7).style("fill", "#facf39")
-      svg.append("circle")
-      .attr("cx",260).attr("cy",320).attr("r", 7).style("fill", "#f99049")
-      svg.append("circle")
-      .attr("cx",520).attr("cy",320).attr("r", 7).style("fill", "#f65e5f")
-      svg.append("circle")
-      .attr("cx",630).attr("cy",320).attr("r", 7).style("fill", "#a070b6")
-      svg.append("circle")
-      .attr("cx",780).attr("cy",320).attr("r", 7).style("fill", "#a06a7b")
-      svg.append("text")
-      .attr("x", 85).attr("y", 320).text("Good").style("font-size", "15px").attr("alignment-baseline","middle")
-      svg.append("text")
-      .attr("x", 165).attr("y", 320).text("Moderate").style("font-size", "15px").attr("alignment-baseline","middle")
-      svg.append("text")
-      .attr("x", 275).attr("y", 320).text("Unhealthy for Sensitive Groups").style("font-size", "15px").attr("alignment-baseline","middle")
-      svg.append("text")
-      .attr("x", 535).attr("y", 320).text("Unhealthy").style("font-size", "15px").attr("alignment-baseline","middle")
-      svg.append("text")
-      .attr("x", 645).attr("y", 320).text("Very Unhealthy").style("font-size", "15px").attr("alignment-baseline","middle")
-      svg.append("text")
-      .attr("x", 795).attr("y", 320).text("Hazardous").style("font-size", "15px").attr("alignment-baseline","middle")
+        // Add legends
+        svg.append("rect")
+        .attr("x",70).attr("y",313).attr('width', 12).attr('height', 12).style("fill", "#9cd84e")
+        svg.append("rect")
+        .attr("x",150).attr("y",313).attr('width', 12).attr('height', 12).style("fill", "#facf39")
+        svg.append("rect")
+        .attr("x",260).attr("y",313).attr('width', 12).attr('height', 12).style("fill", "#f99049")
+        svg.append("rect")
+        .attr("x",520).attr("y",313).attr('width', 12).attr('height', 12).style("fill", "#f65e5f")
+        svg.append("rect")
+        .attr("x",630).attr("y",313).attr('width', 12).attr('height', 12).style("fill", "#a070b6")
+        svg.append("rect")
+        .attr("x",780).attr("y",313).attr('width', 12).attr('height', 12).style("fill", "#a06a7b")
+        svg.append("text")
+        .attr("x", 85).attr("y", 320).text("Good").style("font-size", "15px").attr("alignment-baseline","middle")
+        svg.append("text")
+        .attr("x", 165).attr("y", 320).text("Moderate").style("font-size", "15px").attr("alignment-baseline","middle")
+        svg.append("text")
+        .attr("x", 275).attr("y", 320).text("Unhealthy for Sensitive Groups").style("font-size", "15px").attr("alignment-baseline","middle")
+        svg.append("text")
+        .attr("x", 535).attr("y", 320).text("Unhealthy").style("font-size", "15px").attr("alignment-baseline","middle")
+        svg.append("text")
+        .attr("x", 645).attr("y", 320).text("Very Unhealthy").style("font-size", "15px").attr("alignment-baseline","middle")
+        svg.append("text")
+        .attr("x", 795).attr("y", 320).text("Hazardous").style("font-size", "15px").attr("alignment-baseline","middle")
 
   }
+
+  
 
   return {
     element: svg.node()!,
