@@ -20,8 +20,7 @@ async function update(Station: string) {
   round(quantile_cont("US AQI", 0.1), 2) as AQI_1, 
   round(quantile_cont("US AQI", 0.9), 2) as AQI_2,
   FROM airquality.parquet
-  WHERE "Station name" = '${Station}' 
-  AND Station IS NOT NULL
+  WHERE "Station name" = '${Station}'
   GROUP BY time 
   ORDER BY time`);
 
@@ -29,7 +28,6 @@ async function update(Station: string) {
   SELECT date_trunc('day', "Timestamp(UTC)") as time1, round("US AQI", 2) as AQI1
   FROM airquality.parquet
   WHERE "Station name" = '${Station}'
-  AND Station IS NOT NULL
   GROUP BY time1, AQI1 
   ORDER BY time1`);
 
