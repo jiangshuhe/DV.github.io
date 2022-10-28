@@ -78,7 +78,7 @@ select.on("change", async () => {
 });
 
 
-update("null");
+update("Avalon");
 
 
 // Add the chart to the DOM
