@@ -78,7 +78,7 @@ select.on("change", async () => {
 });
 
 
-update("Avalon");
+update("Lawrenceville");
 
 
 // Add the chart to the DOM
