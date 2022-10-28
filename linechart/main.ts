@@ -80,7 +80,7 @@ select.on("change", async () => {
 });
 
 
-update("Avalon");
+update("null");
 
 
 // Add the chart to the DOM
