@@ -1,6 +1,5 @@
 import * as d3 from "d3";
 
-
 export function lineChart() {
   const margin = { top: 30, right: 0, bottom: 230, left: 50 };
   const width = document.body.clientWidth;
@@ -81,6 +80,9 @@ export function lineChart() {
   const line = svg.append("path").attr("class", "line");
   const area = svg.append("path").attr("class", "area");
   
+  const div = d3.select("body").append("div").attr("class", "tooltip").style("opacity", 0);
+  const formatTime = d3.timeFormat("%Y-%m-%d");
+  
 
   function update1(X: Int32Array, X1: Int32Array, 
     Y: Int32Array, Y_1: Int32Array, Y_2: Int32Array, Y1: Int32Array) {
@@ -114,14 +116,16 @@ export function lineChart() {
       .style("fill", "none")
       .style("stroke", "#000000")
       .style("stroke-width", "2");
-   
-
+    
+  
     svg.select(".xaxis").selectAll("*").remove();
     svg.select(".yaxis").selectAll("*").remove();
     svg.select(".line").selectAll("*").remove();
     svg.select(".area").selectAll("*").remove();
 
+
     // Update axes since we set new domains
+
     svg
       .select<SVGSVGElement>(".yaxis")
       .call(yAxis)
@@ -144,6 +148,8 @@ export function lineChart() {
       );
 
     svg.select<SVGSVGElement>(".xaxis").call(xAxis);
+
+
 
 
     // Add Checkbox
@@ -205,6 +211,33 @@ export function lineChart() {
         .attr("x", 645).attr("y", 320).text("Very Unhealthy").style("font-size", "15px").attr("alignment-baseline","middle")
         svg.append("text")
         .attr("x", 795).attr("y", 320).text("Hazardous").style("font-size", "15px").attr("alignment-baseline","middle")
+
+
+    // Add tooltips
+
+    svg
+      .selectAll(".line")
+      .data(I)
+      .enter()
+      .append("rect")
+      .attr('width', 6.5)
+      .attr('height', 6.5)
+      .style("opacity", 0)
+      .attr("x", (i) => xScale(X[i]))
+      .attr("y", (i) => yScale(Y[i]))
+      .on("mouseover", function (event, i) {
+    
+        div.transition().duration(200).style("opacity", 1);
+          
+        div
+          .html(formatTime(new Date(X[i])) + "<br/>" + "Mean US AQI" + " " + Y[i])
+          .style("left", event.pageX + "px")
+          .style("top", event.pageY - 28 + "px");
+        })
+        
+      .on("mouseout", function () {
+          div.transition().duration(500).style("opacity", 0);
+        });
 
   }
 

@@ -62,6 +62,7 @@ GROUP BY Station
 ORDER BY cnt DESC`);
 
 
+
 // Create a select element for the stations
 const select = d3.select(app).append("select");
 for (const Station of Stations) {
