@@ -177,6 +177,8 @@ export function lineChart() {
         }
       );
 
+      svg.selectAll("circle").remove();
+
 
         // Add legends
         svg.append("rect")
